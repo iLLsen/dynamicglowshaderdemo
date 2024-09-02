@@ -1,0 +1,42 @@
+[gd_resource type="ShaderMaterial" load_steps=8 format=3 uid="uid://ndqlm67idgj0"]
+
+[ext_resource type="Shader" path="res://fieryglow.gdshader" id="1_t30i8"]
+
+[sub_resource type="Curve" id="Curve_2plc8"]
+_data = [Vector2(0.206044, 0.195073), 0.0, 0.0, 0, 0, Vector2(1, 0.316245), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_e1u05"]
+_data = [Vector2(0.118132, 0.16478), 0.0, 0.0, 0, 0, Vector2(0.887363, 0.272969), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_n6iqx"]
+_data = [Vector2(0.112108, 0), 0.0, 0.0, 0, 0, Vector2(0.910314, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_jiftm"]
+curve_x = SubResource("Curve_2plc8")
+curve_y = SubResource("Curve_e1u05")
+curve_z = SubResource("Curve_n6iqx")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_gyedh"]
+frequency = 0.0095
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ospg2"]
+noise = SubResource("FastNoiseLite_gyedh")
+
+[resource]
+shader = ExtResource("1_t30i8")
+shader_parameter/fireball_scale_y = 1.0
+shader_parameter/glow_scale_y = -0.685
+shader_parameter/glow_strength = 6.15
+shader_parameter/glow_intensity = 0.77
+shader_parameter/pixel_size = 1
+shader_parameter/glow_position = Vector2(-0.855, -1.355)
+shader_parameter/glow_size = Vector2(2.35, 3.68)
+shader_parameter/pulsate = true
+shader_parameter/pulsation_speed = 0.19
+shader_parameter/glow_intensity_start = 0.765
+shader_parameter/glow_intensity_stop = 1.15
+shader_parameter/noise = SubResource("NoiseTexture2D_ospg2")
+shader_parameter/colo_curve = SubResource("CurveXYZTexture_jiftm")
